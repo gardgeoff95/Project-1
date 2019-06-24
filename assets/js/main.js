@@ -53,16 +53,49 @@ $("document").ready(function () {
 
 
     database.ref("-Li6vJmWPUCPZGVlKj0W/Categories/").on("value",function(snapshot){
-        category = snapshot.val().category;
+        console.log(snapshot.val());
+        var category = snapshot.val().category;
         amount = snapshot.val().length;
         difficulty = snapshot.val().difficulty;
         queryURL = "https://opentdb.com/api.php?amount="+amount +"&category="+ category +"&difficulty="+ difficulty +"&type=multiple"
+        
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
+            results = response.results;
+            console.log(amount);
+           
+            
+            
+                for(i= 0; i < amount; i++){
+                    var answers = [results[i].incorrect_answers[0], results[i].incorrect_answers[1], results[i].incorrect_answers[2]]
+                    var randIndex = Math.floor(Math.random() * answers.length);
+                    var rs = answers.splice(randIndex, 1);
+                    
+
+                    $("#question").text(results[i].question);
+                    $("#choiceA").text(results[i].correct_answer);
+                    $("#choiceB").text(answers[0]);
+                    $("#choiceC").text(answers[2]);
+                    $("#choiceD").text(answers[1]);
+                    break;
+                }
+
+               
+            });
+
+
+
+
+
+
+
+
+
+
     
-            console.log(response);
+          
         });
     });
     
@@ -87,7 +120,7 @@ $("document").ready(function () {
     //creating categories js
 
     //
-});
+
 
 
 
