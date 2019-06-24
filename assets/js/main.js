@@ -8,93 +8,69 @@ $("document").ready(function () {
         messagingSenderId: "520619679344",
         appId: "1:520619679344:web:9c9addca899ebfba"
     };
-
-    var gameDifficulty;
-    $("#difficulty").on("click",function(){
-        gameDifficulty = $(this).text();
-
-    })
-
-    $.ajax({
-        url: "https://opentdb.com/api.php?amount=10&difficulty=medium&type=multiple",
-        method: "GET"
-    }).then(function (response) {
-        console.log(response);
-        
-
-    })
-    
-    
-    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
-
-
-    
-
-
     var database = firebase.database();
-    database.ref().set({
-        player1 : "notChosen",
-        player2 : "notChosen"
-
+  
     
-    }); 
-    database.ref().push({
-        questionID : 1,
-        answer : false
+
+    $(".categories").on("click",function(){
+        
+        var categoryName = ($(this).attr("category"))
+
+
+        if(categoryName == "Animals"){
+            database.ref("-Li6vJmWPUCPZGVlKj0W/Categories/category").set(27);
+
+        } else if (categoryName == "sports"){
+            database.ref("-Li6vJmWPUCPZGVlKj0W/Categories/category").set(21);
+        } else if (categoryName == "genKnowledge"){
+            database.ref("-Li6vJmWPUCPZGVlKj0W/Categories/category").set(9);
+        } else if (categoryName == "vehicles"){
+            database.ref("-Li6vJmWPUCPZGVlKj0W/Categories/category").set(28);
+
+        }
+
+        
 
 
     });
-    var stateKey; 
+
+
+
+    $(".diffButton1").on("click",function(){
+     
+         database.ref("-Li6vJmWPUCPZGVlKj0W/Categories/difficulty").set($(this).text());
+     
+    })
+
+    $(".quesButton1").on("click",function(){
+        var button = this;
+     
+            database.ref("-Li6vJmWPUCPZGVlKj0W/Categories/length").set($(this).text());
     
-    console.log(database);
-
-
-    database.ref().on("child_added", function(snapshot){
-        console.log(snapshot.key);
-        stateKey = snapshot.key
-
     })
 
 
-    console.log(stateKey)
 
-    var taken = false;
-    $("#p1Button").on("click",function(){
-        database.ref("-LhcnYCg262fREhYvYpd").set({
-            player1 : "chosen"
-            
-
-        })
-
-        
-
-        
-
-      
-
-
-
-     
-
-        
+    database.ref("-Li6vJmWPUCPZGVlKj0W/Categories/").on("value",function(snapshot){
+        category = snapshot.val().category;
+        amount = snapshot.val().length;
+        difficulty = snapshot.val().difficulty;
+        queryURL = "https://opentdb.com/api.php?amount="+amount +"&category="+ category +"&difficulty="+ difficulty +"&type=multiple"
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function (response) {
+    
+            console.log(response);
+        });
     });
+    
+    
+
+    
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
 
     
 
@@ -103,4 +79,36 @@ $("document").ready(function () {
 
 
 
+
+
+
+    
+   
+    //creating categories js
+
+    //
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
