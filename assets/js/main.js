@@ -8,99 +8,72 @@ $("document").ready(function () {
         messagingSenderId: "520619679344",
         appId: "1:520619679344:web:9c9addca899ebfba"
     };
-
-    var gameDifficulty;
-    $("#difficulty").on("click",function(){
-        gameDifficulty = $(this).text();
-
-    })
-
-    $.ajax({
-        url: "https://opentdb.com/api.php?amount=10&difficulty=medium&type=multiple",
-        method: "GET"
-    }).then(function (response) {
-        console.log(response);
-        
-
-    })
-    
-    
-    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
-
-
-    
-
-
     var database = firebase.database();
-    database.ref().set({
-        player1 : "notChosen",
-        player2 : "notChosen"
-
-    
-    }); 
-    database.ref().push({
-        questionID : 1,
-        answer : false
 
 
+
+   
+
+    //creating main page js
+
+    //2 on click functions to set database calls
+
+    $("#p1Choice").on("click", function () {
+
+        database.ref("-Li-SK5eziAtIuM4aLJJ/playerState/p1Taken").set("yes");
     });
-    var stateKey; 
-    
-    console.log(database);
-
-
-    database.ref().on("child_added", function(snapshot){
-        console.log(snapshot.key);
-        stateKey = snapshot.key
-
+    $("#p2Choice").on("click", function () {
+        database.ref("-Li-SK5eziAtIuM4aLJJ/playerState/p2Taken").set("yes");
     })
 
-
-    console.log(stateKey)
-
-    var taken = false;
-    $("#p1Button").on("click",function(){
-        database.ref("-LhcnYCg262fREhYvYpd").set({
-            player1 : "chosen"
-            
-
-        })
-
+    //checks to see whene data changes and sets visibility to hidden;
+    database.ref("-Li-SK5eziAtIuM4aLJJ/playerState").on("value", function (snap) {
+        if (snap.val().p1Taken == "yes") {
+            $("#p1Choice").css("visibility", "hidden");
+        }
+        console.log(snap.val().p2Taken);
+        if (snap.val().p2Taken == "yes") {
+            $("#p2Choice").css("visibility", "hidden");
+        }
         
-
-        
-
-      
-
+        if ((snap.val().p1Taken =="yes")&&(snap.val().p2Taken)=="yes"){
+            window.location.href = "https://stackoverflow.com/questions/10312521/how-to-fetch-all-git-branches";
+        }
 
 
-     
 
-        
+
+
     });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-    
-
-
-
+    //end main page Js
 
 
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
