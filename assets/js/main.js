@@ -130,24 +130,40 @@ $("document").ready(function () {
         var p1Right = 0;
         var p2Right = 0;
 
+        var p1Correct = false;
+        var p2Correct = false;
 
 
 
         $(".choiceButton").on("click", function () {
+
+
+            var isCorrect = $("span", this).attr("answer");
+            console.log(isCorrect);
+
             if (player == 1) {
-                if ($(this).text() == "A.)") {
-                    p1Right++;
-                    database.ref("questions/p1rightanswers").set(p1Right);
+                if (isCorrect == "correct") {
+                    p1Correct = true;
                 }
+
+
+
+
             } else if (player == 2) {
-                if ($(this).text() == "A.)") {
-                    p2Right++;
-                    database.ref("questions/p2rightanswers").set(p2Right);
+                if(isCorrect =="correct"){
+                    p2Correct =true;
                 }
+                
             }
 
 
         });
+
+
+        var questionCounter = 0;
+
+
+
         $.ajax({
             url: queryURL,
             method: "GET"
@@ -155,7 +171,7 @@ $("document").ready(function () {
             results = response.results;
             console.log(results.length);
             var questionArray = []
-            var randomSelector = ["choiceA", "choiceB", "choiceC", "choiceD"];
+
 
             for (i = 0; i < results.length; i++) {
                 questionArray.push(results[i]);
@@ -163,31 +179,67 @@ $("document").ready(function () {
 
             }
             function generateQuestions(questionNumb) {
-                var tempSelec = randomSelector;
+
+                var tempSelec = ["choiceA", "choiceB", "choiceC", "choiceD"];
                 var tempQuestionOrder = []
 
                 for (i = 0; i < 4; i++) {
                     var ri = Math.floor(Math.random() * tempSelec.length);
                     var rs = tempSelec.splice(ri, 1);
                     tempQuestionOrder.push(rs);
-                    
+
                 }
-                $("#submitButton").on("click",function(){
-
-                   
-                    $("#question").html(results[questionNumb].question);
-                    $("#" + tempQuestionOrder[0]).html(results[questionNumb].incorrect_answers[0]);
-                    $("#"+ tempQuestionOrder[1]).html(results[questionNumb].incorrect_answers[1]);
-                    $("#" + tempQuestionOrder[2]).html(results[questionNumb].incorrect_answers[2]);
-                    $("#" + tempQuestionOrder[3]).html(results[questionNumb].correct_answer);
-
-                })
 
 
-                
+
+                $("#question").html(results[questionNumb].question);
+                $("#" + tempQuestionOrder[0]).html(results[questionNumb].incorrect_answers[0]).attr("answer", "incorrect");
+                $("#" + tempQuestionOrder[1]).html(results[questionNumb].incorrect_answers[1]).attr("answer", "incorrect");
+                $("#" + tempQuestionOrder[2]).html(results[questionNumb].incorrect_answers[2]).attr("answer", "incorrect");
+                $("#" + tempQuestionOrder[3]).html(results[questionNumb].correct_answer).attr("answer", "correct");
+
+
+
+
+
+
 
             }
             generateQuestions(0);
+
+
+            $("#submitButton").on("click", function () {
+                console.log(p1Correct);
+                if (player == 1) {
+                    if (p1Correct == true) {
+                        p1Right++;
+                        database.ref("questions/p1rightanswers").set(p1Right);
+                        p1Correct = false;
+                    }
+                }
+
+                if (player == 2) {
+                    if (p2Correct == true) {
+                        p2Right++;
+                        database.ref("questions/p2rightanswers").set(p2Right);
+                        p2Correct = false;
+                    }
+                }
+
+                if (questionCounter < 4) {
+                    questionCounter++;
+                } else {
+                    alert("hello");
+                }
+                console.log(questionCounter);
+                generateQuestions(questionCounter);
+
+
+
+
+
+            });
+
 
 
 
@@ -215,3 +267,8 @@ $("document").ready(function () {
 
 
 //end questions JS
+
+
+
+
+
