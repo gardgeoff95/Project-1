@@ -63,8 +63,9 @@ $("document").ready(function () {
             url: queryURL,
             method: "GET"
         }).then(function (response) {
+            
             results = response.results;
-            console.log(amount);
+            console.log(response);
            
             
             
@@ -72,14 +73,13 @@ $("document").ready(function () {
                     var answers = [results[i].incorrect_answers[0], results[i].incorrect_answers[1], results[i].incorrect_answers[2]]
                     var randIndex = Math.floor(Math.random() * answers.length);
                     var rs = answers.splice(randIndex, 1);
-                    
-
+                    answers = answers.sort(function() { return 0.5 - Math.random() });
                     $("#question").text(results[i].question);
                     $("#choiceA").text(results[i].correct_answer);
                     $("#choiceB").text(answers[0]);
                     $("#choiceC").text(answers[2]);
                     $("#choiceD").text(answers[1]);
-                    break;
+                    
                 }
 
                
