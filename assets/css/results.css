@@ -46,3 +46,22 @@ body{
 #reset:hover{
     background-color:rgb(119, 29, 29)
 }
+
+.playerResults{
+    font-size: 30px;
+}
+.correctAnswer{
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+#p2answers{
+    font-size: 30px;
+    margin-top: 20px;
+}
+
+#p1answers{
+    font-size: 30px;
+    margin-top: 10px;
+
+}

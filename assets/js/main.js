@@ -1,5 +1,6 @@
 $("document").ready(function () {
-    var player;
+    var player
+    var startGame = false;
 
     
  
@@ -46,7 +47,7 @@ $("document").ready(function () {
     database.ref("-Li-SK5eziAtIuM4aLJJ/playerState").on("value", function (snap) {
         if (snap.val().p1Taken == "yes") {
             $("#p1Choice").css("visibility", "hidden");
-            $(".playerButton").css("border", "none");
+            $("#p1Button").css("border", "none");
 
         }
 
@@ -55,7 +56,7 @@ $("document").ready(function () {
         console.log(snap.val().p2Taken);
         if (snap.val().p2Taken == "yes") {
             $("#p2Choice").css("visibility", "hidden");
-            $("#p2Choice").css("border", "none");
+            $("#p2Button").css("border", "none");
         }
 
 
@@ -119,16 +120,26 @@ $("document").ready(function () {
     })
 
     $(".questionAmount").on("click", function () {
-        var button = this;
+        
 
         database.ref("-Li6vJmWPUCPZGVlKj0W/Categories/length").set($(this).text());
 
     })
 
-
+    
 
     $("#categorySubmit").on("click", function () {
-        window.location.href = "index.html"
+        database.ref("-Li6vJmWPUCPZGVlKj0W/Categories/gameStart").set("Start");
+        database.ref("-Li6vJmWPUCPZGVlKj0W/Categories/gameStart").set("Stop")
+        
+
+    });
+
+    database.ref("-Li6vJmWPUCPZGVlKj0W/Categories").on("value",function(snapshot){
+        if((snapshot.val().gameStart=="Start")&&(snapshot.val().category != "null")){
+            window.location.href="index.html"
+            
+        } 
     });
     //end category JS
 
@@ -291,13 +302,21 @@ $("document").ready(function () {
 
 
     });
-    $("#buttonResults").on("click",function(){
-        database.ref("questions/showResults").set("show");
-        
-    });
+  
     database.ref("questions").on("value",function(snapshot){
-        $("#p1answers").text(snapshot.val().p1rightanswers);
-        $("#p2answers").text(snapshot.val().p2rightanswers);
+        
+        p1TotalRight = snapshot.val().p1rightanswers
+        p2TotalRight = snapshot.val().p2rightanswers
+
+        $("#p1answers").text(p1TotalRight);
+        $("#p2answers").text(p2TotalRight);
+
+        if(p1TotalRight > p2TotalRight){
+            $("#p1isWoke").attr("src", result);
+        }
+
+
+
     });
 
 
@@ -319,6 +338,18 @@ $("document").ready(function () {
         window.location.href="mainPage.html";
         
     })
+
+    var giphyQuery = "https://api.giphy.com/v1/gifs/search?api_key=3h1jGoQFBeboB5WoAwTcNZIjaeGb7tmv&q=staywoke&limit=15&offset=0&rating=PG-13&lang=en"
+   
+    $.ajax({
+        url: giphyQuery,
+        method: "GET"
+    }).then(function (response) {
+        result = response.data[Math.floor(Math.random()*response.data.length)].images.fixed_width.url;
+        console.log(result);
+    });
+
+    
 
 
 
