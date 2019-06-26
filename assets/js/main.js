@@ -330,6 +330,12 @@ $("document").ready(function () {
 
         if(p1TotalRight > p2TotalRight){
             $("#p1isWoke").attr("src", result);
+        } else if (p1TotalRight < p2TotalRight) {
+            $("#p2isWoke").attr("src", result);
+
+        } else {
+            $("#p1isWoke").attr("src", result);
+            $("#p2isWoke").attr("src", result);
         }
 
 
