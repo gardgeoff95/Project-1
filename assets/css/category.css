@@ -1,0 +1,48 @@
+body{
+   
+    color:white;
+    background-image: 
+    
+}
+#backgroundImage{
+    background-image: url("../images/water.jpg");
+    background-size: cover;
+    height: 100vh;
+
+    
+
+}
+
+#backgroundColor{
+    height:100vh;
+    background-color: rgba(214,31,199,0.5);
+
+}
+.pure-g{
+    /* z-index: -1; */
+}
+
+.choiceButton{
+    background-color:grey; 
+    border-color: white;
+    border-radius: 12px;
+    
+}
+.choiceButton:hover{
+    background-color: rgb(255, 255, 0);
+    color: black;
+}
+#submitButton{
+background-color:rgb(109, 235, 214);
+border-radius: 12px;
+padding: 10px;
+margin: 20px;
+}
+
+#submitButton:hover{
+    background-color:rgb(255, 255, 0);
+    color: black;
+}
+#question{
+    font-size: 30px;
+}

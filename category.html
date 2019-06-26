@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Woke Categories</title>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+    <script src="assets/js/jQuery.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+        integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+    <div id="backgroundImage">
+        <div id="backgroundColor">
+
+            <div id="container">
+
+                <div id="title" style="text-align: center">
+                    <h1>Woke Categories</h1>
+                    <h2>Pick a topic, the difficulty level, and the amount of questions to answer.</h2>
+                </div>
+
+
+                <div class="pure-g" style="text-align: center">
+                    <div class="pure-u-1-2">
+                        <div category="genKnowledge" class="category" id="first">
+                            <div id="topic1">
+                                <!-- <img class="images" id="firstImage" src="assets/images/placeholder1.jpg"> -->
+                                <h3>General</h3>
+                            </div>
+
+                            <div class="difficulty">
+                                <p>Choose the difficulty</p>
+                                <div id="diffButtons">
+                                    <button class="diffButtonss">easy</button>
+                                    <button class="diffButtonss">medium</button>
+                                    <button class="diffButtonss">hard</button>
+                                </div>
+                            </div>
+
+                            <div class="questions">
+                                <p>Choose amount of questions asked</p>
+                                <div id="quesButtons">
+                                    <button class="questionAmount">5</button>
+                                    <button class="questionAmount">10</button>
+                                    <button class="questionAmount">15</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="pure-u-1-2">
+                        <div category= "politics" class= "category" id="second">
+                            <div id="topic2">
+                                <!-- <img class="images" id="secondImage" src="assets/images/placeholder2.jpg"> -->
+                                <h3>Politics</h3>
+                            </div>
+
+                            <div class="difficulty">
+                                <p>Choose the difficulty</p>
+                            </div>
+                            <div id="diffButtons">
+                                <button class="diffButtonss">easy</button>
+                                <button class="diffButtonss">medium</button>
+                                <button class="diffButtonss">hard</button>
+                            </div>
+                            <div class="questions">
+                                <p>CHoose amount of questions asked</p>
+                                <div id="quesButtons">
+                                    <button class="questionAmount">5</button>
+                                    <button class="questionAmount">10</button>
+                                    <button class="questionAmount">15</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="pure-u-1-2">
+
+                        <div category="history" class="category" id="third">
+                            <div id="topic3">
+                                <!-- <img class="images" id="thirdImage" src="assets/images/placeholder3.jpg"> -->
+                                <h3>History</h3>
+                            </div>
+
+                            <div class="difficulty">
+                                <p>Choose the difficulty</p>
+                            </div>
+                            <div id="diffButtons">
+                                <button class="diffButtonss">easy</button>
+                                <button class="diffButtonss">medium</button>
+                                <button class="diffButtonss">hard</button>
+                            </div>
+                            <div class="questions">
+                                <p>Choose amount of questions asked</p>
+                                <div id="quesButtons">
+                                    <button class="questionAmount">5</button>
+                                    <button class="questionAmount">10</button>
+                                    <button class="questionAmount">15</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="pure-u-1-2">
+                        <div category="comps"class="category" id="fourth">
+                            <div id="topic4">
+                                <!-- <img class="images" id="fourthImage" src="assets/images/placeholder4.jpg"> -->
+                                <h3>Science:Computers</h3>
+                            </div>
+
+                            <div class="difficulty">
+                                <p>Choose the difficulty</p>
+                            </div>
+                            <div id="diffButtons">
+                                <button class="diffButtonss">easy</button>
+                                <button class="diffButtonss">medium</button>
+                                <button class="diffButtonss">hard</button>
+                            </div>
+                            <div class="questions">
+                                <p>CHoose amount of questions asked</p>
+                                <div id="quesButtons">
+                                    <button class="questionAmount">5</button>
+                                    <button class="questionAmount">10</button>
+                                    <button class="questionAmount">15</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                    <button id="categorySubmit">Submit</button>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

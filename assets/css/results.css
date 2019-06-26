@@ -1,0 +1,48 @@
+body{
+   
+    color:white;
+ 
+}
+#backgroundImage{
+    background-image: url("../images/water.jpg");
+    background-size: cover;
+    height: 100vh;
+
+    
+
+}
+
+#backgroundColor{
+    height:100vh;
+    background-color: rgba(214,31,199,0.5);
+    text-align:center;
+
+}
+
+#displayResults{
+    margin:auto;
+    display:block;
+    
+    
+
+}
+#buttonResults{
+    background-color:rgb(109, 235, 214);
+    border-radius: 12px;
+    padding: 10px;
+}
+#buttonResults:hover{
+    background-color:rgb(255, 255, 0);
+    color: black;
+
+
+}
+#reset{
+    background-color:rgb(241, 66, 66);
+    border-radius: 12px;
+    padding: 10px;
+
+}
+#reset:hover{
+    background-color:rgb(119, 29, 29)
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Results Page</title>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+    <script src="assets/js/jQuery.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+        integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+        integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/results.css" />
+</head>
+
+<body>
+    <div id="backgroundImage">
+        <div id="backgroundColor">
+
+            <div>
+                <h1 style="text-align:center">Here are your woke results!</h1>
+            </div>
+            <div id="displayResults">
+                <button id="buttonResults">
+                    Show Results
+                </button>
+                <button id="reset">Reset Game</button>
+            </div>
+            <div class="pure-g">
+
+
+                <div class="pure-u-1-2" style="text-align: center">
+                    <p>player1</p>
+                    <div>number of correct answers</div>
+                    <span id="p1answers">2222</span>
+                </div>
+                <div class="pure-u-1-2" style="text-align: center">
+                    <p>player2</p>
+                    <div>number of correct answers</div>
+                    <span id="p2answers"> 444</span>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+</body>
+
+</html>
