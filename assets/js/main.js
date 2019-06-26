@@ -1,6 +1,10 @@
 $("document").ready(function () {
     var player;
 
+    
+ 
+    
+
 
     if (localStorage.getItem("player") != null) {
         player = localStorage.getItem("player");
@@ -42,14 +46,16 @@ $("document").ready(function () {
     database.ref("-Li-SK5eziAtIuM4aLJJ/playerState").on("value", function (snap) {
         if (snap.val().p1Taken == "yes") {
             $("#p1Choice").css("visibility", "hidden");
-            $(".playerButton").css("border","none");
-            
+            $(".playerButton").css("border", "none");
+
         }
+
+        //makes buttons dissapear on click
 
         console.log(snap.val().p2Taken);
         if (snap.val().p2Taken == "yes") {
             $("#p2Choice").css("visibility", "hidden");
-            $("#p2Choice").css("border","none");
+            $("#p2Choice").css("border", "none");
         }
 
 
@@ -75,8 +81,10 @@ $("document").ready(function () {
     //end main page JS
     //start category JS
 
+    //on click functions that sets the category/difficulty/length of the game within the database for later API calls
+
     $(".category").on("click", function () {
-        
+
 
         var categoryName = ($(this).attr("category"))
         console.log(categoryName);
@@ -101,6 +109,9 @@ $("document").ready(function () {
 
 
 
+
+
+
     $(".diffButtonss").on("click", function () {
 
         database.ref("-Li6vJmWPUCPZGVlKj0W/Categories/difficulty").set($(this).text());
@@ -122,6 +133,9 @@ $("document").ready(function () {
     //end category JS
 
     //start questions JS
+    
+
+    //building the API call with what we answered on the previous screen
     database.ref("-Li6vJmWPUCPZGVlKj0W/Categories/").on("value", function (snapshot) {
         console.log(snapshot.val());
         category = snapshot.val().category;
@@ -131,7 +145,7 @@ $("document").ready(function () {
 
 
 
-
+        
         var p1Right = 0;
         var p2Right = 0;
 
@@ -155,10 +169,10 @@ $("document").ready(function () {
 
 
             } else if (player == 2) {
-                if(isCorrect =="correct"){
-                    p2Correct =true;
+                if (isCorrect == "correct") {
+                    p2Correct = true;
                 }
-                
+
             }
 
 
@@ -231,10 +245,16 @@ $("document").ready(function () {
                     }
                 }
 
-                if (questionCounter < results.length -1) {
+                if (questionCounter < results.length - 1) {
                     questionCounter++;
                 } else {
-                    alert("hello");
+                   
+                    window.location.href="resultsPage.html"
+                    
+
+
+
+                   
                 }
                 console.log(questionCounter);
                 generateQuestions(questionCounter);
@@ -244,8 +264,8 @@ $("document").ready(function () {
 
 
             });
-
-
+            
+         
 
 
 
@@ -253,38 +273,53 @@ $("document").ready(function () {
         });
 
 
+        $("#p1answers").text(p1Right);
+        $("#p2answers").text(p2Right);
+      
+    
 
 
 
 
 
 
+       
 
 
+     
+    
 
 
     });
- 
+    $("#buttonResults").on("click",function(){
+        database.ref("questions/showResults").set("show");
+        
+    });
+    database.ref("questions").on("value",function(snapshot){
+        $("#p1answers").text(snapshot.val().p1rightanswers);
+        $("#p2answers").text(snapshot.val().p2rightanswers);
+    });
 
 
+    $("#reset").on("click",function(){
+        database.ref("-Li-SK5eziAtIuM4aLJJ/playerState").set({
+            p1Taken : "no",
+            p2Taken : "no"
+        });
+        database.ref("-Li6vJmWPUCPZGVlKj0W/Categories").set({
+            category : "null",
+            difficulty : "null",
+            length : "5"
+        })
+        database.ref("questions").set({
+            p1rightanswers: 0,
+            p2rightanswers: 0,
+            showResults:"no"
+        })
+        window.location.href="mainPage.html";
+        
+    })
 
-
-
-    //start last page JS
-
-
-
-//    using databse.ref("Path Name Here").on("val",function(){});
-
-
-
-//reference the databse for number of right answers for each player
-
-
-//console.log() your response so you know you're getting the right info
-
-
-//ask rodrigo for the name of the ids that you want each value to go to;
 
 
 
