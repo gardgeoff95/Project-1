@@ -35,12 +35,25 @@ $("document").ready(function () {
 
     $("#p1Choice").on("click", function () {
 
+
+        var p1Name = $("#p1Name").val()
+
+
         setState(1, "yes");
         localStorage.setItem("player", "1");
+
+     
+        database.ref("-Li-SK5eziAtIuM4aLJJ/playerState/p1Name").set(p1Name);
+
+
+
     });
     $("#p2Choice").on("click", function () {
+        var p2Name = $("#p2Name").val()
+
         setState(2, "yes");
         localStorage.setItem("player", "2");
+        database.ref("-Li-SK5eziAtIuM4aLJJ/playerState/p2Name").set(p2Name);
     })
 
     //checks to see whene data changes and sets visibility to hidden;
@@ -48,6 +61,7 @@ $("document").ready(function () {
         if (snap.val().p1Taken == "yes") {
             $("#p1Choice").css("visibility", "hidden");
             $("#p1Button").css("border", "none");
+            $("#p1Name").css("visibility","hidden");
 
         }
 
@@ -57,6 +71,7 @@ $("document").ready(function () {
         if (snap.val().p2Taken == "yes") {
             $("#p2Choice").css("visibility", "hidden");
             $("#p2Button").css("border", "none");
+            $("#p2Name").css("visibility","hidden");
         }
 
 
@@ -69,6 +84,8 @@ $("document").ready(function () {
 
 
         }
+        $("#p1Name").text(snap.val().p1Name);
+        $("#p2Name").text(snap.val().p2Name);
 
 
 
@@ -321,9 +338,13 @@ $("document").ready(function () {
 
 
     $("#reset").on("click",function(){
+
+        localStorage.clear();
         database.ref("-Li-SK5eziAtIuM4aLJJ/playerState").set({
             p1Taken : "no",
-            p2Taken : "no"
+            p2Taken : "no",
+            p1Name : "player1",
+            p2Name : "player2"
         });
         database.ref("-Li6vJmWPUCPZGVlKj0W/Categories").set({
             category : "null",
