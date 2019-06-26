@@ -28,9 +28,21 @@ body{
     border-radius: 12px;
     
 }
+.choiceButton:hover{
+    background-color: rgb(255, 255, 0);
+    color: black;
+}
 #submitButton{
 background-color:rgb(109, 235, 214);
 border-radius: 12px;
 padding: 10px;
 margin: 20px;
+}
+
+#submitButton:hover{
+    background-color:rgb(255, 255, 0);
+    color: black;
+}
+#question{
+    font-size: 30px;
 }

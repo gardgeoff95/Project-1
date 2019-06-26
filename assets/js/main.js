@@ -42,11 +42,14 @@ $("document").ready(function () {
     database.ref("-Li-SK5eziAtIuM4aLJJ/playerState").on("value", function (snap) {
         if (snap.val().p1Taken == "yes") {
             $("#p1Choice").css("visibility", "hidden");
+            $(".playerButton").css("border","none");
+            
         }
 
         console.log(snap.val().p2Taken);
         if (snap.val().p2Taken == "yes") {
             $("#p2Choice").css("visibility", "hidden");
+            $("#p2Choice").css("border","none");
         }
 
 
@@ -72,20 +75,22 @@ $("document").ready(function () {
     //end main page JS
     //start category JS
 
-    $(".categories").on("click", function () {
+    $(".category").on("click", function () {
+        
 
         var categoryName = ($(this).attr("category"))
+        console.log(categoryName);
 
 
-        if (categoryName == "animals") {
-            database.ref("-Li6vJmWPUCPZGVlKj0W/Categories/category").set(27);
+        if (categoryName == "politics") {
+            database.ref("-Li6vJmWPUCPZGVlKj0W/Categories/category").set(24);
 
-        } else if (categoryName == "sports") {
-            database.ref("-Li6vJmWPUCPZGVlKj0W/Categories/category").set(21);
+        } else if (categoryName == "history") {
+            database.ref("-Li6vJmWPUCPZGVlKj0W/Categories/category").set(23);
         } else if (categoryName == "genKnowledge") {
             database.ref("-Li6vJmWPUCPZGVlKj0W/Categories/category").set(9);
-        } else if (categoryName == "vehicles") {
-            database.ref("-Li6vJmWPUCPZGVlKj0W/Categories/category").set(28);
+        } else if (categoryName == "comps") {
+            database.ref("-Li6vJmWPUCPZGVlKj0W/Categories/category").set(18);
 
         }
 
@@ -96,13 +101,13 @@ $("document").ready(function () {
 
 
 
-    $(".diffButton1").on("click", function () {
+    $(".diffButtonss").on("click", function () {
 
         database.ref("-Li6vJmWPUCPZGVlKj0W/Categories/difficulty").set($(this).text());
 
     })
 
-    $(".quesButton1").on("click", function () {
+    $(".questionAmount").on("click", function () {
         var button = this;
 
         database.ref("-Li6vJmWPUCPZGVlKj0W/Categories/length").set($(this).text());
@@ -111,7 +116,7 @@ $("document").ready(function () {
 
 
 
-    $("#submitButtonCat").on("click", function () {
+    $("#categorySubmit").on("click", function () {
         window.location.href = "index.html"
     });
     //end category JS
@@ -226,7 +231,7 @@ $("document").ready(function () {
                     }
                 }
 
-                if (questionCounter < 4) {
+                if (questionCounter < results.length -1) {
                     questionCounter++;
                 } else {
                     alert("hello");
@@ -259,6 +264,31 @@ $("document").ready(function () {
 
 
     });
+ 
+
+
+
+
+
+    //start last page JS
+
+
+
+//    using databse.ref("Path Name Here").on("val",function(){});
+
+
+
+//reference the databse for number of right answers for each player
+
+
+//console.log() your response so you know you're getting the right info
+
+
+//ask rodrigo for the name of the ids that you want each value to go to;
+
+
+
+
 
 });
 
